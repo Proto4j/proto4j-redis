@@ -1,0 +1,3 @@
+module:proto4j.redis
+org.proto4j.redis
+org.proto4j.redis.sql

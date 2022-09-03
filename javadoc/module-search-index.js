@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"proto4j.redis"}]
