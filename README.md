@@ -1,5 +1,3 @@
-# Proto4j-Redis
-
 This is the official documentation to the `Proto4j` module `Redis`. This framework is designed to implement a defined Java interface.
 
 The developer documentation is provided [here](https://proto4j.github.io/proto4j-redis/javadoc/index.html). Alternatively, the source code is heavily documented, which should make it easier to understand the system.
