@@ -28,6 +28,7 @@ import org.proto4j.redis.sql.SQLValidator;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.util.Map;
 
 class SQLMethod {
 
@@ -67,7 +68,11 @@ class SQLMethod {
                     replacement = fromArray(value);
                 }
                 else if (params[i].typed) {
-                    // not sure how
+                    throw new UnsupportedOperationException("Typed parameters are not allowed");
+                }
+                else if (params[i].mapped) {
+                    statement = fromMap(value);
+                    continue;
                 }
             } else {
                 replacement = "'" + replacement + "'";
@@ -97,6 +102,26 @@ class SQLMethod {
             sb.append(rp);
         }
         return sb.toString();
+    }
+
+    private String fromMap(Object value) {
+        Map<?, ?> map = (Map<?, ?>) value;
+        String st = sql;
+
+        for (Object key : map.keySet()) {
+            String pattern = '{' + key.toString() + '}';
+            if (st.contains(pattern)) {
+                Object mappedValue = map.get(key);
+                if (mappedValue instanceof String
+                        || mappedValue instanceof Character) {
+                    st = st.replace(pattern, "'" + mappedValue.toString() + "'");
+                }
+                else {
+                    st = st.replace(pattern, String.valueOf(mappedValue));
+                }
+            }
+        }
+        return st;
     }
 
     public SQLValidator getValidator() {
