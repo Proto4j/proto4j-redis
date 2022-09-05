@@ -2,7 +2,7 @@
 
 A type-safe framework to turn a java interface into a database worker. For more information please visit [the documentation](https://proto4j.github.io/proto4j-redis/).
 
-This repository contains the source code for the `Redis module from `Proto4j`. It is considered to be a development repository where changes can be made and features can be requested. `SQLFactory` implementation modules are provided in the `factories` directory.
+This repository contains the source code for the `Redis` module from `Proto4j`. It is considered to be a development repository where changes can be made and features can be requested. `SQLFactory` implementation modules are provided in the `factories` directory. Currently, only SQLite and MySQL are provided.
 
 ## Download
 
