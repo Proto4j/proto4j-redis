@@ -4,6 +4,27 @@ A type-safe framework to turn a java interface into a database worker. For more 
 
 This repository contains the source code for the `Redis` module from `Proto4j`. It is considered to be a development repository where changes can be made and features can be requested. `SQLFactory` implementation modules are provided in the `factories` directory. Currently, only SQLite and MySQL are provided.
 
+# Example usage
+
+This framework is built to be user-friendly when working with generated service workers. The following example illustrates a simple user service:
+
+````java
+@SQL(SQLiteFactory.FACTORY)
+public interface UserDao {
+    @SQL.Select("select * from {table};")
+    public List<User> fetchUsers(@Param("table") String tableName);
+}
+
+public static void main(String[]args) {
+    SQLiteConfiguration config = new SQLiteConfiguration("mydb");
+    UserDao userDao = Redis.create(UserDao.class, config);
+    // fetch all user objects
+    for (User user : userDao.fetchUsers("user_table1")) {
+        // ...
+    }
+}
+````
+
 ## Download
 
 Download the [latest JAR file](https://github.com/Proto4j/proto4j-redis/releases) from the releases tab and the `SQLFactory` implementation JAR file what you intend to use. This framework requires a minimum of Java 8+ for developing and running.
